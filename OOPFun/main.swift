@@ -31,9 +31,39 @@ func bookClassDriver() {
     print(book1)
     print(book2)
     
-    var book3 = Book(ISBN: "30495-XXX", title: "Harry Potter and the Prisoner of Azkaban", author: "JK Rowling", numPages: 400)
+    var book3 = Book(ISBN: "30495-XXX", title: "Harry Potter and the Prisoner of Azkaban", author: "JK Rowling", numPages: 400, price: 10.0, genre: .fantasy)
     print(book3)
     // print(book1 == book3)
+    print(book3.price)
+    book3.discountPrice(withPercent: 20)
+    print(book3.price)
+    print(book3.genre)
+    print(book3.genre.rawValue)
+    
+    // switch statements
+    // they go hand in hand with enums
+    // switch statements must be exhaustive
+    switch book3.genre {
+    case .fantasy:
+        print("the genre is fantasy")
+        //fallthrough
+    case .sciencefiction:
+        print("the genre is sci-fi")
+    case .nonfiction:
+        print("the genre is non-fiction")
+    }
+    // there is an implicit break at the end of each case
+    // use the fallthrough keyword if you don't want to break
+    // you can ranges
+    let x = 100
+    switch x {
+    case 0..<10:
+        print("x is 0 through 9")
+    case 10..<20:
+        print("x is 10 through 19")
+    default:
+        print("x is some other value")
+    }
 }
 
 bookClassDriver()

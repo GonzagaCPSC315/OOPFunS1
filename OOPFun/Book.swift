@@ -63,20 +63,30 @@ struct Book: CustomStringConvertible {
     var description: String {
         return "\(title) by \(author)"
     }
-    
-    // an initializer is like a constructor
-    // if you initialize all the values for properties at declaration,
-    // then Swift is going to give you a default initializer
-    init(ISBN: String, title: String, author: String, numPages: Int) {
-        self.ISBN = ISBN
-        self.title = title
-        self.author = author
-        self.numPages = numPages
+    // property observers
+    // you can moonitor when a property gets updated
+    // and execute code accordingly
+    var price: Double = 0.0 {
+        // we can observe with willSet and didSet
+        willSet {
+            // this code executes right before price is assigned a new value
+            // an access the new value with newValue
+            print("\(price) is about to be assigned \(newValue)")
+        }
+        didSet {
+            // this code executes right after price is assigned a new value
+            // you can access the old value with oldValue
+            print("price is now \(price). before it was is \(oldValue)")
+        }
     }
-    
-    // when we add an initializer, we lose the default value initializer
-    // you might see init?() this a called a failable initializer
-    // if an initializer cannot initialize an object, it will return nil (optional)
+    var genre: Genre = .nonfiction
     
     // methods
+    // example of a mutating method
+    mutating func discountPrice(withPercent percent: Double) {
+        // task: finish this method
+        // ex: markdown by 20% a book that is $10 would be discounted
+        // to $8
+        price = (100.0 - percent) / 100.0 * price
+    }
 }
